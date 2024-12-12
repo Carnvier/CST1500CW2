@@ -1,21 +1,53 @@
+# variable definition
 processes = {}
 time = 0
-no_processes = int(input("What is the number of processes running: "))
-quantum_time = float(input("Please enter the quantum: "))
-count = 0
+process_count = 0
 
-# Input process details
-while count < no_processes:
-    name = input(f"Enter the name of process {count + 1}: ")
-    burst_time = int(input(f"Enter the burst time for process {count + 1}: "))
-    arrival_time = int(input(f"Enter the arrival time for process {count + 1}: "))
+# Input process detailS
+while True:
+    try:
+        no_processes = int(input("What is the number of processes running: "))
+        if no_processes <= 0:
+            raise ValueError("The number of processes must be a positive integer.")
+        break
+    except ValueError as e:
+        print(e)
+while True:
+    try:
+        quantum_time = float(input("Please enter the quantum: "))
+        if quantum_time <= 0:
+            raise ValueError("Quantum time must be a positive number.")
+        break
+    except ValueError as e:
+        print(e)
+while process_count < no_processes:
+    name = input(f"Enter the name of process {process_count + 1}: ")
+    while True:
+        try:
+            burst_time = int(input(f"Enter the burst time for process {process_count + 1}: "))
+            if burst_time < 0:
+                raise ValueError("Burst time must be a non-negative integer.")
+            break
+        except ValueError as e:
+            print(e)
+    while True:
+        try:
+            arrival_time = int(input(f"Enter the arrival time for process {process_count + 1}: "))
+            if arrival_time < 0:
+                raise ValueError("Arrival time must be a non-negative integer.")
+            break
+        except ValueError as e:
+            print(e)
+
     processes[name] = {
         'burst_time': burst_time,
         'arrival_time': arrival_time,
         'remaining_time': burst_time,
         'waiting_time': 0
     }
-    count += 1
+
+    process_count += 1
+
 
 # Sorting the processes based on their arrival times
 processes = dict(sorted(processes.items(), key=lambda item: item[1]['arrival_time']))
