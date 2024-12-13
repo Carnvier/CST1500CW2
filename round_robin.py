@@ -61,7 +61,7 @@ while True:
             continue
         
         # Check if the process can finish within the quantum time
-        if processes[process]["remaining_time"] <= quantum_time and processes[process]["remaining_time"] >= 0:
+        if processes[process]["remaining_time"] <= quantum_time and processes[process]["remaining_time"] > 0:
             time += processes[process]["remaining_time"]
             processes[process]['waiting_time'] = time - processes[process]['arrival_time'] - processes[process]['burst_time']
             processes[process]['remaining_time'] = 0
