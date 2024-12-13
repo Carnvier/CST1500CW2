@@ -1,4 +1,4 @@
-# First Come First Serve
+# First Come First Server
 """
 TT = total time
 CT = current time
